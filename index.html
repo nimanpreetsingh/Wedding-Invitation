@@ -823,7 +823,7 @@
             const floralVarieties = ['🌸', '🌺', '🌹', '🌼', '✨', '💐', '🌷'];
 
             setInterval(() => {
-                if (container.children.length > 24) return;
+                if (container.children.length > 15) return;
 
                 const petal = document.createElement('div');
                 petal.className = 'petal';
@@ -851,7 +851,7 @@
                 container.appendChild(petal);
 
                 setTimeout(() => petal.remove(), (duration + 0.5) * 1000);
-            }, 450);
+            }, 1000);
         }
 
         // Interactive Touch/Tap Blossom Trails
