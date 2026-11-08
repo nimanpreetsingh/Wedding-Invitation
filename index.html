@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Ceremony: Jassa Singh & Parveen Kaur</title>
+    <title>Wedding Ceremony: Jassa Singh & Parveen Kaur • ਇੱਕੋ ਮਿੱਕੇ</title>
 
     <!-- Social Media / WhatsApp Rich Link Preview -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Wedding Invitation • Jassa Singh & Parveen Kaur">
-    <meta property="og:description" content="You are cordially invited to celebrate our wedding on Monday, 16 Nov 2026 at H.R.T. Resorts, Malout.">
+    <meta property="og:title" content="Wedding Invitation • Jassa Singh & Parveen Kaur • ਇੱਕੋ ਮਿੱਕੇ">
+    <meta property="og:description" content="ਹੋਏ ਮੈਂ ਤੇ ਸੱਜਣ ਇੱਕੋ ਮਿੱਕੇ • You are cordially invited to celebrate our wedding on Monday, 16 Nov 2026 at H.R.T. Resorts, Malout.">
     <meta name="theme-color" content="#FAF3E3">
 
     <!-- Tailwind CSS (Fast CDN) -->
@@ -85,7 +85,12 @@
             background: rgba(255, 255, 255, 0.92);
             border: 1px solid rgba(184, 134, 30, 0.22);
             box-shadow: 0 10px 28px -5px rgba(180, 140, 100, 0.12);
-            transform: translateZ(0); /* Hardware accelerated */
+            transform: translateZ(0);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .glass-card-dark:hover {
+            box-shadow: 0 16px 36px -6px rgba(180, 140, 100, 0.18);
         }
 
         /* Envelope 3D Animation with GPU Acceleration */
@@ -148,8 +153,8 @@
             top: 125px;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 54px;
-            height: 54px;
+            width: 58px;
+            height: 58px;
             border-radius: 9999px;
             z-index: 35;
             background: radial-gradient(circle at 35% 35%, #F06A83, #D4435F 70%, #9E1B24 100%);
@@ -190,36 +195,122 @@
             pointer-events: none;
         }
 
-        @keyframes floatPetal {
-            0% { transform: translate3d(0, -20px, 0) rotate(0deg); opacity: 0; }
-            15% { opacity: 0.85; }
-            85% { opacity: 0.85; }
-            100% { transform: translate3d(80px, 105vh, 0) rotate(360deg); opacity: 0; }
+        /* Smooth Floating Flower Shower */
+        @keyframes floatPetalRealistic {
+            0% {
+                transform: translate3d(0, -30px, 0) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.95;
+            }
+            50% {
+                transform: translate3d(var(--drift-mid), 50vh, 0) rotate(var(--rot-mid)) scale(1);
+            }
+            85% {
+                opacity: 0.95;
+            }
+            100% {
+                transform: translate3d(var(--drift-end), 108vh, 0) rotate(var(--rot-end)) scale(0.85);
+                opacity: 0;
+            }
         }
 
         .petal {
             position: fixed;
             pointer-events: none;
-            z-index: 40;
-            animation: floatPetal linear infinite;
+            z-index: 38;
+            animation: floatPetalRealistic linear infinite;
             will-change: transform, opacity;
+            user-select: none;
+        }
+
+        /* Touch Trail Particle */
+        .touch-bloom {
+            position: fixed;
+            pointer-events: none;
+            z-index: 45;
+            animation: touchBloomAnim 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            will-change: transform, opacity;
+            user-select: none;
+        }
+
+        @keyframes touchBloomAnim {
+            0% {
+                transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -100px) scale(1.4) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        /* Pulse animation for interactive counter */
+        @keyframes countBump {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.25); }
+            100% { transform: scale(1); }
+        }
+        .count-bump {
+            animation: countBump 0.3s ease-out;
+        }
+
+        .ikko-badge {
+            background: linear-gradient(135deg, rgba(255, 245, 230, 0.95) 0%, rgba(254, 237, 240, 0.95) 100%);
+            border: 1px solid rgba(184, 134, 30, 0.35);
+            box-shadow: 0 4px 15px rgba(184, 134, 30, 0.12);
+        }
+
+        /* Equalizer Bars Animation */
+        .eq-bar {
+            width: 3px;
+            background-color: #E11D48;
+            border-radius: 9999px;
+            animation: bounceEq 1.3s ease-in-out infinite alternate;
+        }
+        .eq-bar:nth-child(2) { animation-delay: 0.3s; }
+        .eq-bar:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes bounceEq {
+            0% { height: 3px; }
+            100% { height: 16px; }
         }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-blush-200 selection:text-stone-900 relative overflow-x-hidden text-stone-800">
+
+    <!-- Direct Romantic Wedding Audio Player -->
+    <audio id="wedding-song" preload="auto" loop playsinline>
+        <!-- 1. Local MP3 uploaded to your GitHub repository (same folder as index.html) -->
+        <source src="song.mp3" type="audio/mp3">
+        <source src="song.mp3" type="audio/mpeg">
+        <source src="./song.mp3" type="audio/mp3">
+        <!-- 2. Reliable online romantic fallback streams -->
+        <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-moment-1100.mp3" type="audio/mp3">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/16/audio_db6591201e.mp3" type="audio/mp3">
+    </audio>
 
     <!-- Petals Canvas Layer -->
     <div id="petal-container" class="fixed inset-0 pointer-events-none z-30 overflow-hidden"></div>
 
     <!-- Floating Audio Control & Blessings Action -->
     <div class="fixed bottom-6 right-6 z-50 flex items-center gap-3">
-        <button id="audio-toggle-btn" onclick="toggleAudio()" class="w-12 h-12 rounded-full bg-white/95 border border-royalgold-400 text-royalgold-600 shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all group" title="Play / Pause Wedding Chimes">
-            <i id="audio-icon" class="fa-solid fa-volume-xmark text-lg group-hover:rotate-12 transition-transform"></i>
-            <span class="sr-only">Toggle Music</span>
+        <!-- Song Play/Pause Button -->
+        <button id="audio-toggle-btn" onclick="toggleAudio()" class="h-12 px-4 rounded-full bg-white/95 border border-royalgold-400 text-royalgold-700 shadow-xl flex items-center gap-2 hover:scale-105 active:scale-95 transition-all group backdrop-blur-md" title="Play / Pause Song">
+            <div id="music-bars" class="hidden items-center gap-0.5 h-4">
+                <span class="eq-bar"></span>
+                <span class="eq-bar"></span>
+                <span class="eq-bar"></span>
+            </div>
+            <i id="audio-icon" class="fa-solid fa-music text-rose-600 text-base"></i>
+            <span id="audio-btn-text" class="text-xs font-cinzel font-bold text-stone-800 tracking-wider">Play Song</span>
         </button>
+
         <button onclick="triggerRoseShower()" class="px-5 py-3 rounded-full bg-gradient-to-r from-royalgold-500 via-rose-400 to-blush-500 text-white font-cinzel font-bold text-xs tracking-widest uppercase shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2">
             <i class="fa-solid fa-spa text-sm"></i>
             <span>Bless Couple</span>
+            <span id="floating-bless-counter" class="ml-1 px-2 py-0.5 rounded-full bg-white/25 text-[10px] font-bold">108</span>
         </button>
     </div>
 
@@ -235,11 +326,11 @@
                     </div>
                 </div>
 
-                <!-- Central Wax Seal -->
+                <!-- Central Wax Seal with Ikko Mikke Accent -->
                 <div id="envelope-seal" class="envelope-seal flex items-center justify-center">
-                    <div class="w-full h-full rounded-full border border-dashed border-white/80 flex flex-col items-center justify-center text-white">
+                    <div class="w-full h-full rounded-full border border-dashed border-white/80 flex flex-col items-center justify-center text-white text-center">
                         <span class="text-xl font-gurmukhi text-white leading-none">ੴ</span>
-                        <span class="text-[7px] font-cinzel tracking-widest uppercase font-bold text-white/95 mt-0.5">OPEN</span>
+                        <span class="text-[6.5px] font-gurmukhi tracking-wider text-rose-100 font-bold mt-0.5">ਇੱਕੋ ਮਿੱਕੇ</span>
                     </div>
                 </div>
 
@@ -250,14 +341,14 @@
                 <div id="envelope-hint" class="absolute bottom-5 left-0 right-0 z-30 text-center pointer-events-none">
                     <span class="text-xs text-stone-600 font-cinzel tracking-widest font-semibold flex items-center justify-center gap-2 animate-bounce">
                         <i class="fa-solid fa-hand-pointer text-[11px] text-amber-600"></i>
-                        <span>Tap Envelope to Open</span>
+                        <span>Tap Envelope to Open & Play Music</span>
                     </span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MAIN SITE CONTENT (Loaded & Ready for Zero Lag) -->
+    <!-- MAIN SITE CONTENT -->
     <div id="main-content" class="min-h-screen opacity-0 transition-opacity duration-700">
         
         <!-- TOP STICKY NAVIGATION -->
@@ -266,6 +357,7 @@
                 <a href="#" class="flex items-center space-x-2">
                     <span class="text-2xl font-gurmukhi text-royalgold-600">ੴ</span>
                     <span class="font-script text-2xl md:text-3xl text-rose-900 font-bold">Jassa & Parveen</span>
+                    <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-[11px] font-gurmukhi text-rose-700 bg-rose-50 border border-rose-200 ml-1">ਇੱਕੋ ਮਿੱਕੇ</span>
                 </a>
                 <nav class="hidden md:flex space-x-8 text-xs font-cinzel font-semibold tracking-widest uppercase text-stone-700">
                     <a href="#ceremony" class="hover:text-royalgold-600 transition-colors">Ceremony</a>
@@ -335,6 +427,20 @@
                             </div>
                         </div>
 
+                        <!-- IKKO MIKKE SPECIAL BANNER EMBED -->
+                        <div class="mt-6 flex flex-col items-center justify-center">
+                            <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full ikko-badge">
+                                <span class="text-rose-600 text-sm">✨</span>
+                                <span class="font-gurmukhi text-lg sm:text-xl text-stone-900 font-bold tracking-wide">
+                                    ਹੋਏ ਮੈਂ ਤੇ ਸੱਜਣ ਇੱਕੋ ਮਿੱਕੇ
+                                </span>
+                                <span class="text-rose-600 text-sm">✨</span>
+                            </div>
+                            <p class="text-[11px] sm:text-xs text-royalgold-700 font-cinzel uppercase tracking-[0.25em] font-semibold mt-1.5">
+                                Two Souls Entwined In Sacred Harmony
+                            </p>
+                        </div>
+
                         <!-- Bride Parentage -->
                         <div class="mt-5">
                             <p class="text-sm sm:text-base text-stone-700 font-marcellus italic max-w-xl mx-auto font-medium">
@@ -391,23 +497,23 @@
                 </div>
             </div>
 
-            <!-- LIVE COUNTDOWN TIMER -->
+            <!-- LIVE COUNTDOWN TIMER (Tap to Ripple) -->
             <div class="max-w-3xl mx-auto mt-14 px-4">
                 <span class="text-xs uppercase tracking-[0.3em] text-royalgold-700 font-cinzel font-semibold block mb-4">Countdown to Auspicious Moments</span>
                 <div class="grid grid-cols-4 gap-3 sm:gap-6">
-                    <div class="p-4 sm:p-6 rounded-2xl glass-card-dark text-center border border-royalgold-200">
+                    <div onclick="rippleSparkle(this)" class="p-4 sm:p-6 rounded-2xl glass-card-dark text-center border border-royalgold-200 cursor-pointer active:scale-95 transition-transform" title="Tap to celebrate">
                         <span id="days" class="block text-3xl sm:text-5xl font-cinzel font-extrabold gold-shimmer-text">00</span>
                         <span class="text-[10px] sm:text-xs uppercase tracking-widest text-stone-500 font-cinzel mt-1 block font-semibold">Days</span>
                     </div>
-                    <div class="p-4 sm:p-6 rounded-2xl glass-card-dark text-center border border-royalgold-200">
+                    <div onclick="rippleSparkle(this)" class="p-4 sm:p-6 rounded-2xl glass-card-dark text-center border border-royalgold-200 cursor-pointer active:scale-95 transition-transform" title="Tap to celebrate">
                         <span id="hours" class="block text-3xl sm:text-5xl font-cinzel font-extrabold gold-shimmer-text">00</span>
                         <span class="text-[10px] sm:text-xs uppercase tracking-widest text-stone-500 font-cinzel mt-1 block font-semibold">Hours</span>
                     </div>
-                    <div class="p-4 sm:p-6 rounded-2xl glass-card-dark text-center border border-royalgold-200">
+                    <div onclick="rippleSparkle(this)" class="p-4 sm:p-6 rounded-2xl glass-card-dark text-center border border-royalgold-200 cursor-pointer active:scale-95 transition-transform" title="Tap to celebrate">
                         <span id="minutes" class="block text-3xl sm:text-5xl font-cinzel font-extrabold gold-shimmer-text">00</span>
                         <span class="text-[10px] sm:text-xs uppercase tracking-widest text-stone-500 font-cinzel mt-1 block font-semibold">Minutes</span>
                     </div>
-                    <div class="p-4 sm:p-6 rounded-2xl glass-card-dark text-center border border-royalgold-200">
+                    <div onclick="rippleSparkle(this)" class="p-4 sm:p-6 rounded-2xl glass-card-dark text-center border border-royalgold-200 cursor-pointer active:scale-95 transition-transform" title="Tap to celebrate">
                         <span id="seconds" class="block text-3xl sm:text-5xl font-cinzel font-extrabold text-rose-600">00</span>
                         <span class="text-[10px] sm:text-xs uppercase tracking-widest text-stone-500 font-cinzel mt-1 block font-semibold">Seconds</span>
                     </div>
@@ -574,6 +680,9 @@
             <div class="max-w-2xl mx-auto space-y-3">
                 <span class="text-3xl font-gurmukhi text-royalgold-600">ੴ</span>
                 <p class="text-3xl font-script text-rose-900 font-bold">Jassa Singh & Parveen Kaur</p>
+                <div class="inline-block px-3 py-1 bg-amber-50 border border-royalgold-200 rounded-full">
+                    <span class="text-xs font-gurmukhi text-stone-800 font-semibold">ਹੋਏ ਮੈਂ ਤੇ ਸੱਜਣ ਇੱਕੋ ਮਿੱਕੇ</span>
+                </div>
                 <p class="text-xs text-stone-600 font-marcellus">
                     Patil Residence: Gobind Nagar, St. No. 2, Malout • 16 November 2026 • H.R.T. Resorts
                 </p>
@@ -583,72 +692,86 @@
 
     </div>
 
-    <!-- Notification Toast -->
+    <!-- Clean Notification Toast -->
     <div id="toast" class="fixed top-6 right-6 z-50 transform translate-y-[-150%] transition-transform duration-300 bg-white border border-royalgold-300 px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 pointer-events-none">
-        <i id="toast-icon" class="fa-solid fa-circle-check text-rose-500"></i>
+        <i id="toast-icon" class="fa-solid fa-heart text-rose-500"></i>
         <span id="toast-msg" class="text-xs font-bold text-stone-800 font-cinzel tracking-wider"></span>
     </div>
 
-    <!-- HIGH-EFFICIENCY SCRIPT (Zero Freeze / Zero Lag) -->
+    <!-- SCRIPT -->
     <script>
         let isOpening = false;
-        let audioContext = null;
         let isPlayingAudio = false;
-        let audioInterval = null;
+        let blessingsCount = 108;
+        const song = document.getElementById('wedding-song');
 
-        // Instant Native Web Audio Chimes (Ultra-light, Zero Lag)
-        function playChime(freq = 523.25, time = 0) {
-            if (!audioContext) return;
-            const osc = audioContext.createOscillator();
-            const gain = audioContext.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq, audioContext.currentTime + time);
-            
-            gain.gain.setValueAtTime(0, audioContext.currentTime + time);
-            gain.gain.linearRampToValueAtTime(0.08, audioContext.currentTime + time + 0.05);
-            gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + time + 2.0);
-            
-            osc.connect(gain);
-            gain.connect(audioContext.destination);
-            
-            osc.start(audioContext.currentTime + time);
-            osc.stop(audioContext.currentTime + time + 2.2);
+        // Robust mobile-ready audio play
+        function playWeddingSong() {
+            if (!song) return;
+
+            song.playbackRate = 0.88; // Romantic tempo
+            song.volume = 1.0;
+
+            const playPromise = song.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isPlayingAudio = true;
+                    updateAudioUI(true);
+                }).catch((err) => {
+                    console.log("Waiting for user gesture to play audio:", err);
+                    const unlockAudio = () => {
+                        song.play().then(() => {
+                            isPlayingAudio = true;
+                            updateAudioUI(true);
+                        }).catch(e => console.log(e));
+                        window.removeEventListener('click', unlockAudio);
+                        window.removeEventListener('touchstart', unlockAudio);
+                    };
+                    window.addEventListener('click', unlockAudio, { once: true });
+                    window.addEventListener('touchstart', unlockAudio, { once: true });
+                });
+            }
         }
 
-        function playWeddingChimeLoop() {
-            if (!audioContext) {
-                const AudioCtx = window.AudioContext || window.webkitAudioContext;
-                audioContext = new AudioCtx();
-            }
-            if (audioContext.state === 'suspended') {
-                audioContext.resume();
-            }
-
-            // Play Indian classical pentatonic tones (Sa, Re, Ga, Pa, Dha)
-            const ragaNotes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25];
-            let step = 0;
-
-            audioInterval = setInterval(() => {
-                const note = ragaNotes[step % ragaNotes.length];
-                playChime(note, 0);
-                step++;
-            }, 1400);
-
-            isPlayingAudio = true;
-            document.getElementById('audio-icon').className = 'fa-solid fa-volume-high text-lg text-rose-500';
-            document.getElementById('audio-toggle-btn').classList.add('ring-2', 'ring-rose-400');
+        function pauseWeddingSong() {
+            if (!song) return;
+            song.pause();
+            isPlayingAudio = false;
+            updateAudioUI(false);
         }
 
         function toggleAudio() {
             if (!isPlayingAudio) {
-                playWeddingChimeLoop();
-                showToast("Soft wedding chimes playing", "fa-music");
+                playWeddingSong();
+                showToast("Playing Music", "fa-music");
             } else {
-                clearInterval(audioInterval);
-                isPlayingAudio = false;
-                document.getElementById('audio-icon').className = 'fa-solid fa-volume-xmark text-lg text-stone-500';
-                document.getElementById('audio-toggle-btn').classList.remove('ring-2', 'ring-rose-400');
-                showToast("Music muted", "fa-volume-xmark");
+                pauseWeddingSong();
+                showToast("Song Paused", "fa-pause");
+            }
+        }
+
+        function updateAudioUI(playing) {
+            const btnText = document.getElementById('audio-btn-text');
+            const icon = document.getElementById('audio-icon');
+            const musicBars = document.getElementById('music-bars');
+            const btn = document.getElementById('audio-toggle-btn');
+
+            if (playing) {
+                if (btnText) btnText.textContent = "Pause Song";
+                if (icon) icon.className = "fa-solid fa-pause text-rose-600 text-sm";
+                if (musicBars) {
+                    musicBars.classList.remove('hidden');
+                    musicBars.classList.add('flex');
+                }
+                if (btn) btn.classList.add('ring-2', 'ring-rose-400');
+            } else {
+                if (btnText) btnText.textContent = "Play Song";
+                if (icon) icon.className = "fa-solid fa-play text-rose-600 text-sm";
+                if (musicBars) {
+                    musicBars.classList.add('hidden');
+                    musicBars.classList.remove('flex');
+                }
+                if (btn) btn.classList.remove('ring-2', 'ring-rose-400');
             }
         }
 
@@ -657,6 +780,9 @@
             if (isOpening) return;
             isOpening = true;
 
+            // Immediately trigger music on envelope tap
+            playWeddingSong();
+
             const envelopeBox = document.getElementById('envelope-box');
             const overlay = document.getElementById('royal-envelope-overlay');
             const hint = document.getElementById('envelope-hint');
@@ -664,18 +790,15 @@
 
             if (hint) hint.style.opacity = '0';
 
-            // Start gentle chime audio
-            try { playWeddingChimeLoop(); } catch(e) {}
-
             // Open flap
             envelopeBox.classList.add('open');
 
-            // Quick confetti burst
+            // Quick celebratory confetti & petal burst
             confetti({
-                particleCount: 50,
-                spread: 60,
+                particleCount: 75,
+                spread: 70,
                 origin: { y: 0.5 },
-                colors: ['#D4AF37', '#F06A83', '#FFE4E8']
+                colors: ['#D4AF37', '#F06A83', '#FFE4E8', '#FFB7B2']
             });
 
             // Smooth expansion into page
@@ -686,44 +809,122 @@
                 mainContent.classList.add('opacity-100');
             }, 300);
 
-            // Clean up overlay
+            // Clean up overlay and initiate flower showers + touch interactions
             setTimeout(() => {
                 overlay.style.display = 'none';
-                startLightweightPetals();
-                showToast("Welcome to the Celebration!", "fa-champagne-glasses");
+                startAbundantPetals();
+                initTouchBlossoms();
             }, 850);
         }
 
-        // Lightweight Petal Animation (Only 5 active elements to protect low-end mobile CPUs)
-        function startLightweightPetals() {
+        // Rich, Natural Floral Shower
+        function startAbundantPetals() {
             const container = document.getElementById('petal-container');
-            const florals = ['🌸', '🌺', '🌹', '✨'];
+            const floralVarieties = ['🌸', '🌺', '🌹', '🌼', '✨', '💐', '🌷'];
 
             setInterval(() => {
-                if (container.children.length > 6) return;
+                if (container.children.length > 24) return;
+
                 const petal = document.createElement('div');
-                petal.className = 'petal text-sm';
-                petal.textContent = florals[Math.floor(Math.random() * florals.length)];
-                petal.style.left = (Math.random() * 90) + 'vw';
-                petal.style.top = '-20px';
-                petal.style.animationDuration = (7 + Math.random() * 4) + 's';
+                petal.className = 'petal';
+                petal.textContent = floralVarieties[Math.floor(Math.random() * floralVarieties.length)];
+
+                const sizes = ['text-xs', 'text-sm', 'text-base', 'text-lg', 'text-xl'];
+                petal.classList.add(sizes[Math.floor(Math.random() * sizes.length)]);
+
+                const startX = Math.random() * 96;
+                const driftMid = (Math.random() * 60 - 30) + 'px';
+                const driftEnd = (Math.random() * 120 - 60) + 'px';
+                const rotMid = (Math.random() * 240 - 120) + 'deg';
+                const rotEnd = (Math.random() * 720 - 360) + 'deg';
+
+                petal.style.left = startX + 'vw';
+                petal.style.top = '-25px';
+                petal.style.setProperty('--drift-mid', driftMid);
+                petal.style.setProperty('--drift-end', driftEnd);
+                petal.style.setProperty('--rot-mid', rotMid);
+                petal.style.setProperty('--rot-end', rotEnd);
+
+                const duration = 5.5 + Math.random() * 5.5;
+                petal.style.animationDuration = duration + 's';
+
                 container.appendChild(petal);
 
-                setTimeout(() => petal.remove(), 11000);
-            }, 2000);
+                setTimeout(() => petal.remove(), (duration + 0.5) * 1000);
+            }, 450);
         }
 
+        // Interactive Touch/Tap Blossom Trails
+        function initTouchBlossoms() {
+            const blossoms = ['🌸', '✨', '🌹', '💖'];
+            let lastSpawn = 0;
+
+            const handlePointer = (e) => {
+                const now = Date.now();
+                if (now - lastSpawn < 90) return;
+                lastSpawn = now;
+
+                const x = e.clientX || (e.touches && e.touches[0].clientX);
+                const y = e.clientY || (e.touches && e.touches[0].clientY);
+                if (!x || !y) return;
+
+                const bloom = document.createElement('div');
+                bloom.className = 'touch-bloom text-base';
+                bloom.textContent = blossoms[Math.floor(Math.random() * blossoms.length)];
+                bloom.style.left = x + 'px';
+                bloom.style.top = y + 'px';
+                document.body.appendChild(bloom);
+
+                setTimeout(() => bloom.remove(), 950);
+            };
+
+            window.addEventListener('click', handlePointer);
+            window.addEventListener('touchmove', handlePointer, { passive: true });
+        }
+
+        // Interactive Blessings Counter with Rose Shower
         function triggerRoseShower() {
+            blessingsCount++;
+            const counter = document.getElementById('floating-bless-counter');
+            if (counter) {
+                counter.textContent = blessingsCount;
+                counter.classList.add('count-bump');
+                setTimeout(() => counter.classList.remove('count-bump'), 300);
+            }
+
             confetti({
-                particleCount: 60,
-                spread: 60,
+                particleCount: 70,
+                spread: 75,
                 origin: { y: 0.7 },
-                colors: ['#D4AF37', '#F06A83', '#FFE4E8']
+                colors: ['#D4AF37', '#F06A83', '#FFE4E8', '#FFB7B2']
             });
-            showToast("Blessings showered on the couple!", "fa-heart");
+
+            // Resume audio if paused
+            if (song && song.paused) {
+                playWeddingSong();
+            }
+
+            // Clean blessing toast counter without extra lines
+            showToast(`Blessing #${blessingsCount} showered! ✨`, "fa-heart");
         }
 
-        // Reliable ISO-8601 Date Parsing (Monday, 16 Nov 2026, 10:15 AM IST)
+        // Interactive Countdown Sparkle
+        function rippleSparkle(el) {
+            el.classList.add('ring-2', 'ring-rose-400');
+            setTimeout(() => el.classList.remove('ring-2', 'ring-rose-400'), 500);
+
+            confetti({
+                particleCount: 25,
+                spread: 45,
+                origin: { 
+                    x: el.getBoundingClientRect().left / window.innerWidth + 0.05, 
+                    y: el.getBoundingClientRect().top / window.innerHeight + 0.05 
+                },
+                colors: ['#D4AF37', '#F06A83']
+            });
+        }
+
+        // Auspicious Date Countdown (Monday, 16 Nov 2026, 10:15 AM IST)
         const weddingDate = new Date('2026-11-16T10:15:00+05:30').getTime();
 
         function updateCountdown() {
@@ -756,7 +957,6 @@
             secondsEl.innerText = String(seconds).padStart(2, '0');
         }
 
-        // Initialize immediately and run every second
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
