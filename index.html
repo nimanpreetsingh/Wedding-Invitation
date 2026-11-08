@@ -1,0 +1,794 @@
+```html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Ceremony: Jassa Singh & Parveen Kaur</title>
+
+    <!-- Social Media / WhatsApp Rich Link Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Wedding Invitation • Jassa Singh & Parveen Kaur">
+    <meta property="og:description" content="You are cordially invited to celebrate our wedding on Monday, 16 Nov 2026 at H.R.T. Resorts, Malout.">
+    <meta name="theme-color" content="#FAF3E3">
+
+    <!-- Tailwind CSS (Fast CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Pre-connect & Optimized Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Great+Vibes&family=Marcellus&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+    
+    <!-- Lightweight Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        royalgold: {
+                            50: '#FDFBF7',
+                            100: '#FAF3E3',
+                            200: '#F2E4C2',
+                            300: '#E2C889',
+                            400: '#CBA44C',
+                            500: '#B8861E',
+                            600: '#946914',
+                            700: '#73500C',
+                            800: '#523807'
+                        },
+                        blush: {
+                            50: '#FFF9FA',
+                            100: '#FFF0F3',
+                            200: '#FFE4E8',
+                            300: '#FDCED6',
+                            400: '#F9A5B3',
+                            500: '#F06A83'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        marcellus: ['Marcellus', 'serif'],
+                        script: ['"Great Vibes"', 'cursive'],
+                        gurmukhi: ['"Rozha One"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Hardware-Accelerated High-Performance Styles */
+        body {
+            background-color: #FCFAF6;
+            color: #2D2727;
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(253, 206, 214, 0.45) 0%, transparent 45%),
+                radial-gradient(circle at 90% 20%, rgba(228, 237, 229, 0.55) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(255, 248, 235, 0.8) 0%, transparent 70%);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .gold-shimmer-text {
+            background: linear-gradient(135deg, #7A5306 0%, #B8861E 45%, #D4A33B 70%, #946914 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-card-dark {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(184, 134, 30, 0.22);
+            box-shadow: 0 10px 28px -5px rgba(180, 140, 100, 0.12);
+            transform: translateZ(0); /* Hardware accelerated */
+        }
+
+        /* Envelope 3D Animation with GPU Acceleration */
+        .envelope-perspective {
+            perspective: 1400px;
+            will-change: transform, opacity;
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            height: 290px;
+            background: #FDF9F3;
+            border-radius: 16px;
+            box-shadow: 0 20px 45px -10px rgba(110, 75, 45, 0.35);
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, max-width, height, opacity;
+        }
+
+        .envelope-flap-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 155px;
+            transform-origin: top center;
+            transform-style: preserve-3d;
+            z-index: 28;
+            transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+            will-change: transform;
+        }
+
+        .envelope-flap-front {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, #F9F2E7 0%, #EFE4D0 100%);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-top: 1px solid rgba(184, 134, 30, 0.35);
+        }
+
+        .envelope-pocket {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(145deg, #FAF4E9 0%, #F5EBD7 100%);
+            clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 50% 55%);
+            z-index: 22;
+            border-radius: 0 0 16px 16px;
+            border: 1px solid rgba(184, 134, 30, 0.28);
+            pointer-events: none;
+            transition: opacity 0.5s ease, transform 0.6s ease;
+        }
+
+        .envelope-seal {
+            position: absolute;
+            top: 125px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 54px;
+            height: 54px;
+            border-radius: 9999px;
+            z-index: 35;
+            background: radial-gradient(circle at 35% 35%, #F06A83, #D4435F 70%, #9E1B24 100%);
+            box-shadow: 0 8px 20px rgba(212, 67, 95, 0.35);
+            transition: transform 0.4s ease, opacity 0.3s ease;
+        }
+
+        /* Seamless Morph */
+        .envelope-wrapper.open .envelope-flap-container {
+            transform: rotateX(180deg);
+            opacity: 0;
+        }
+
+        .envelope-wrapper.open .envelope-seal {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
+
+        .envelope-wrapper.open .envelope-pocket {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .envelope-wrapper.morph-to-page {
+            max-width: 100vw !important;
+            height: 100vh !important;
+            border-radius: 0 !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+
+        .corner-ornament {
+            width: 28px;
+            height: 28px;
+            position: absolute;
+            border-color: #B8861E;
+            pointer-events: none;
+        }
+
+        @keyframes floatPetal {
+            0% { transform: translate3d(0, -20px, 0) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.85; }
+            85% { opacity: 0.85; }
+            100% { transform: translate3d(80px, 105vh, 0) rotate(360deg); opacity: 0; }
+        }
+
+        .petal {
+            position: fixed;
+            pointer-events: none;
+            z-index: 40;
+            animation: floatPetal linear infinite;
+            will-change: transform, opacity;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-blush-200 selection:text-stone-900 relative overflow-x-hidden text-stone-800">
+
+    <!-- Petals Canvas Layer -->
+    <div id="petal-container" class="fixed inset-0 pointer-events-none z-30 overflow-hidden"></div>
+
+    <!-- Floating Audio Control & Blessings Action -->
+    <div class="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+        <button id="audio-toggle-btn" onclick="toggleAudio()" class="w-12 h-12 rounded-full bg-white/95 border border-royalgold-400 text-royalgold-600 shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all group" title="Play / Pause Wedding Chimes">
+            <i id="audio-icon" class="fa-solid fa-volume-xmark text-lg group-hover:rotate-12 transition-transform"></i>
+            <span class="sr-only">Toggle Music</span>
+        </button>
+        <button onclick="triggerRoseShower()" class="px-5 py-3 rounded-full bg-gradient-to-r from-royalgold-500 via-rose-400 to-blush-500 text-white font-cinzel font-bold text-xs tracking-widest uppercase shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2">
+            <i class="fa-solid fa-spa text-sm"></i>
+            <span>Bless Couple</span>
+        </button>
+    </div>
+
+    <!-- ENVELOPE ENTRY OVERLAY -->
+    <div id="royal-envelope-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/60 backdrop-blur-sm p-4 envelope-perspective transition-colors duration-700">
+        <div id="envelope-stage" class="w-full h-full flex items-center justify-center">
+            <div id="envelope-box" class="envelope-wrapper select-none overflow-hidden" onclick="triggerCardOpenSequence()">
+                
+                <!-- 3D Triangular Flap -->
+                <div id="envelope-flap" class="envelope-flap-container">
+                    <div class="envelope-flap-front flex items-start justify-center pt-2">
+                        <div class="w-12 h-0.5 bg-royalgold-400/40 rounded-full mt-1.5"></div>
+                    </div>
+                </div>
+
+                <!-- Central Wax Seal -->
+                <div id="envelope-seal" class="envelope-seal flex items-center justify-center">
+                    <div class="w-full h-full rounded-full border border-dashed border-white/80 flex flex-col items-center justify-center text-white">
+                        <span class="text-xl font-gurmukhi text-white leading-none">ੴ</span>
+                        <span class="text-[7px] font-cinzel tracking-widest uppercase font-bold text-white/95 mt-0.5">OPEN</span>
+                    </div>
+                </div>
+
+                <!-- Envelope Pocket -->
+                <div class="envelope-pocket"></div>
+
+                <!-- Hint -->
+                <div id="envelope-hint" class="absolute bottom-5 left-0 right-0 z-30 text-center pointer-events-none">
+                    <span class="text-xs text-stone-600 font-cinzel tracking-widest font-semibold flex items-center justify-center gap-2 animate-bounce">
+                        <i class="fa-solid fa-hand-pointer text-[11px] text-amber-600"></i>
+                        <span>Tap Envelope to Open</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN SITE CONTENT (Loaded & Ready for Zero Lag) -->
+    <div id="main-content" class="min-h-screen opacity-0 transition-opacity duration-700">
+        
+        <!-- TOP STICKY NAVIGATION -->
+        <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-sm border-b border-royalgold-200/80 shadow-sm">
+            <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+                <a href="#" class="flex items-center space-x-2">
+                    <span class="text-2xl font-gurmukhi text-royalgold-600">ੴ</span>
+                    <span class="font-script text-2xl md:text-3xl text-rose-900 font-bold">Jassa & Parveen</span>
+                </a>
+                <nav class="hidden md:flex space-x-8 text-xs font-cinzel font-semibold tracking-widest uppercase text-stone-700">
+                    <a href="#ceremony" class="hover:text-royalgold-600 transition-colors">Ceremony</a>
+                    <a href="#family" class="hover:text-royalgold-600 transition-colors">Family</a>
+                    <a href="#venue" class="hover:text-royalgold-600 transition-colors">Venue & Map</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- HERO SECTION -->
+        <section id="ceremony" class="relative pt-10 pb-20 px-4 text-center overflow-hidden">
+            <div class="max-w-4xl mx-auto">
+                
+                <!-- Gurbani Verse -->
+                <div class="inline-block p-6 sm:p-8 rounded-3xl glass-card-dark mb-8 max-w-2xl mx-auto border-2 border-royalgold-200">
+                    <p class="font-gurmukhi text-2xl md:text-3xl text-royalgold-600 mb-2">ੴ ਸਤਿਗੁਰ ਪ੍ਰਸਾਦਿ॥</p>
+                    <p class="text-base sm:text-lg font-gurmukhi text-stone-800 leading-relaxed font-semibold">
+                        ਸੰਤਾ ਕੇ ਕਾਰਜਿ ਆਪਿ ਖਲੋਇਆ ਹਰਿ ਕੰਮੁ ਕਰਾਵਣਿ ਆਇਆ ਰਾਮ॥
+                    </p>
+                    <div class="w-16 h-0.5 bg-royalgold-400/60 mx-auto my-3"></div>
+                    <p class="text-xs text-stone-600 font-marcellus tracking-wider">
+                        "The Lord Himself has stood up to resolve the affairs of the Saints; He has come to accomplish their tasks."
+                    </p>
+                </div>
+
+                <!-- Revered Elders & Family Invitation -->
+                <div class="space-y-4">
+                    <p class="text-xs uppercase tracking-[0.3em] text-royalgold-700 font-cinzel font-semibold">With the heavenly blessings of the most revered</p>
+                    <h3 class="text-xl sm:text-2xl font-cinzel text-stone-900 font-bold tracking-wide">
+                        Late Sdn. Bachan Kaur & S. Harnam Singh
+                    </h3>
+                    
+                    <div class="py-2">
+                        <p class="text-base sm:text-lg text-stone-800 font-marcellus font-semibold">
+                            <span class="text-royalgold-700">Sdn. Ranjeet Kaur & S. Jarnail Singh Patil</span>
+                        </p>
+                        <p class="text-xs text-stone-600 uppercase tracking-widest font-cinzel mt-1 font-medium">
+                            Request your gracious presence on the auspicious occasion of the Wedding Ceremony of their beloved son
+                        </p>
+                    </div>
+
+                    <!-- COUPLE NAMES -->
+                    <div class="py-6 my-2 relative">
+                        <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
+                            <div class="text-center md:text-right">
+                                <h1 class="text-5xl sm:text-6xl md:text-7xl font-cinzel font-bold text-stone-900 tracking-tight">
+                                    Jassa Singh
+                                </h1>
+                                <span class="inline-block mt-2 px-3 py-1 bg-amber-50 border border-royalgold-300 rounded-full text-[10px] uppercase font-cinzel font-semibold tracking-widest text-royalgold-700">
+                                    The Groom
+                                </span>
+                            </div>
+
+                            <div class="my-2 md:my-0 flex items-center justify-center">
+                                <div class="w-14 h-14 rounded-full border border-rose-300 bg-rose-50 flex items-center justify-center text-rose-700 font-script text-4xl shadow-md">
+                                    &
+                                </div>
+                            </div>
+
+                            <div class="text-center md:text-left">
+                                <h1 class="text-5xl sm:text-6xl md:text-7xl font-cinzel font-bold text-rose-950 tracking-tight">
+                                    Parveen Kaur
+                                </h1>
+                                <span class="inline-block mt-2 px-3 py-1 bg-rose-50 border border-rose-300 rounded-full text-[10px] uppercase font-cinzel font-semibold tracking-widest text-rose-700">
+                                    The Bride
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Bride Parentage -->
+                        <div class="mt-5">
+                            <p class="text-sm sm:text-base text-stone-700 font-marcellus italic max-w-xl mx-auto font-medium">
+                                (D/o Sdn. Manjeet Kaur & S. Jagseer Singh Rattan of Deon, Bathinda)
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- SPECIAL INVITATION NOTE -->
+                    <div class="max-w-xl mx-auto my-5 p-5 rounded-2xl glass-card-dark border border-royalgold-300 text-center">
+                        <div class="inline-flex items-center gap-2 mb-1 text-rose-500 text-xs">
+                            <i class="fa-solid fa-sparkles"></i>
+                            <span class="text-[11px] font-cinzel font-bold tracking-[0.2em] uppercase text-royalgold-700">Warmly Invited</span>
+                            <i class="fa-solid fa-sparkles"></i>
+                        </div>
+                        <p class="text-stone-800 font-marcellus text-sm sm:text-base leading-relaxed">
+                            You are cordially invited to celebrate our wedding day with us.
+                        </p>
+                    </div>
+
+                    <!-- Residence Pill -->
+                    <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border border-royalgold-300 text-xs font-marcellus text-stone-700 shadow-sm">
+                        <i class="fa-solid fa-location-dot text-rose-500"></i>
+                        <span>Residence: Gobind Nagar, St. No. 2, Malout</span>
+                    </div>
+
+                    <!-- WEDDING DATE HIGHLIGHT -->
+                    <div class="mt-8">
+                        <div class="inline-flex flex-col sm:flex-row items-center gap-6 p-6 rounded-3xl glass-card-dark border-2 border-royalgold-200 shadow-lg">
+                            <div class="flex items-center gap-4">
+                                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-royalgold-500 to-rose-400 flex flex-col items-center justify-center text-white font-bold leading-tight shadow-md">
+                                    <span class="text-[10px] uppercase font-cinzel tracking-wider">NOV</span>
+                                    <span class="text-2xl font-cinzel font-black leading-none">16</span>
+                                </div>
+                                <div class="text-left">
+                                    <p class="font-cinzel font-extrabold text-stone-900 tracking-wider text-lg sm:text-xl">MONDAY, 16 NOV. 2026</p>
+                                    <p class="text-xs text-rose-700 font-cinzel font-semibold tracking-widest uppercase">Departure of Barat: 10:15 AM</p>
+                                </div>
+                            </div>
+                            <div class="h-10 w-px bg-stone-300 hidden sm:block"></div>
+                            <div class="flex items-center gap-3">
+                                <button onclick="addToCalendar()" class="px-4 py-2.5 rounded-xl bg-white hover:bg-stone-50 text-stone-800 font-cinzel font-bold text-xs uppercase tracking-widest flex items-center gap-2 border border-royalgold-300 transition-all shadow-sm">
+                                    <i class="fa-regular fa-calendar-plus text-sm text-royalgold-600"></i>
+                                    <span>Add to Calendar</span>
+                                </button>
+                                <button onclick="triggerRoseShower()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-royalgold-500 to-rose-500 text-white font-cinzel font-bold text-xs uppercase tracking-widest flex items-center gap-2 shadow transition-all">
+                                    <i class="fa-solid fa-heart"></i>
+                                    <span>Bless Couple</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- LIVE COUNTDOWN TIMER -->
+            <div class="max-w-3xl mx-auto mt-14 px-4">
+                <span class="text-xs uppercase tracking-[0.3em] text-royalgold-700 font-cinzel font-semibold block mb-4">Countdown to Auspicious Moments</span>
+                <div class="grid grid-cols-4 gap-3 sm:gap-6">
+                    <div class="p-4 sm:p-6 rounded-2xl glass-card-dark text-center border border-royalgold-200">
+                        <span id="days" class="block text-3xl sm:text-5xl font-cinzel font-extrabold gold-shimmer-text">00</span>
+                        <span class="text-[10px] sm:text-xs uppercase tracking-widest text-stone-500 font-cinzel mt-1 block font-semibold">Days</span>
+                    </div>
+                    <div class="p-4 sm:p-6 rounded-2xl glass-card-dark text-center border border-royalgold-200">
+                        <span id="hours" class="block text-3xl sm:text-5xl font-cinzel font-extrabold gold-shimmer-text">00</span>
+                        <span class="text-[10px] sm:text-xs uppercase tracking-widest text-stone-500 font-cinzel mt-1 block font-semibold">Hours</span>
+                    </div>
+                    <div class="p-4 sm:p-6 rounded-2xl glass-card-dark text-center border border-royalgold-200">
+                        <span id="minutes" class="block text-3xl sm:text-5xl font-cinzel font-extrabold gold-shimmer-text">00</span>
+                        <span class="text-[10px] sm:text-xs uppercase tracking-widest text-stone-500 font-cinzel mt-1 block font-semibold">Minutes</span>
+                    </div>
+                    <div class="p-4 sm:p-6 rounded-2xl glass-card-dark text-center border border-royalgold-200">
+                        <span id="seconds" class="block text-3xl sm:text-5xl font-cinzel font-extrabold text-rose-600">00</span>
+                        <span class="text-[10px] sm:text-xs uppercase tracking-widest text-stone-500 font-cinzel mt-1 block font-semibold">Seconds</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- THE FAMILY SECTION -->
+        <section id="family" class="py-16 px-4 relative">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center space-y-2 mb-12">
+                    <span class="px-3.5 py-1 rounded-full text-[11px] uppercase tracking-widest text-royalgold-700 bg-amber-50 font-cinzel font-semibold inline-block border border-royalgold-300">Pillars of Love</span>
+                    <h2 class="text-3xl sm:text-4xl font-cinzel font-bold text-stone-900">Family & Elders</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                    <!-- Heavenly Blessings -->
+                    <div class="glass-card-dark p-8 rounded-3xl border border-royalgold-200 text-center flex flex-col justify-between">
+                        <div>
+                            <div class="w-14 h-14 rounded-full bg-amber-50 border border-royalgold-300 mx-auto flex items-center justify-center text-royalgold-600 text-xl mb-4">
+                                <i class="fa-solid fa-dove"></i>
+                            </div>
+                            <span class="text-[11px] uppercase font-cinzel font-bold tracking-widest text-royalgold-700 block mb-2">Heavenly Blessings</span>
+                            <h4 class="text-xl font-cinzel font-bold text-stone-900 leading-snug">
+                                Late Sdn. Bachan Kaur &amp; S. Harnam Singh
+                            </h4>
+                            <p class="text-sm text-stone-600 font-marcellus mt-3">
+                                Guiding us from the heavens with eternal love, timeless wisdom, and divine grace.
+                            </p>
+                        </div>
+                        <div class="pt-6">
+                            <span class="text-sm font-gurmukhi text-royalgold-700 font-semibold">ੴ ਸਦਾ ਅੰਗ ਸੰਗੇ</span>
+                        </div>
+                    </div>
+
+                    <!-- Parents Card -->
+                    <div class="glass-card-dark p-8 rounded-3xl border-2 border-royalgold-300 text-center relative flex flex-col justify-between shadow-md">
+                        <div>
+                            <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-royalgold-500 to-rose-400 mx-auto flex items-center justify-center text-white text-xl mb-4">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <span class="text-[11px] uppercase font-cinzel font-bold tracking-widest text-rose-700 block mb-2">Host &amp; Parents</span>
+                            <h4 class="text-2xl font-cinzel font-bold text-stone-900 leading-snug">
+                                Sdn. Ranjeet Kaur &amp; S. Jarnail Singh Patil
+                            </h4>
+                            <p class="text-sm text-stone-700 font-marcellus mt-3 leading-relaxed">
+                                Warmly solicit your presence, good wishes, and graceful company on this joyous milestone.
+                            </p>
+                            <p class="text-xs text-royalgold-800 font-marcellus mt-2 font-medium">
+                                Gobind Nagar, St. No. 2, Malout
+                            </p>
+                        </div>
+                        <div class="pt-6">
+                            <span class="text-xs font-cinzel font-bold text-royalgold-700 tracking-wider">
+                                Cordially Welcomes You
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VENUE SECTION -->
+        <section id="venue" class="py-16 px-4 relative">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center space-y-2 mb-12">
+                    <span class="px-3.5 py-1 rounded-full text-[11px] uppercase tracking-widest text-royalgold-700 bg-amber-50 font-cinzel font-semibold inline-block border border-royalgold-300">Destination</span>
+                    <h2 class="text-3xl sm:text-4xl font-cinzel font-bold text-stone-900">Venue & Directions</h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="glass-card-dark p-8 rounded-3xl border border-royalgold-200">
+                            <span class="text-xs uppercase tracking-widest text-royalgold-700 font-cinzel font-semibold block mb-1">Official Wedding Resort</span>
+                            <h3 class="text-3xl font-cinzel font-bold text-stone-900">H.R.T. Resorts</h3>
+                            <p class="text-base text-stone-700 mt-2 flex items-center gap-2 font-marcellus font-medium">
+                                <i class="fa-solid fa-location-dot text-rose-500"></i>
+                                <span>Bathinda Road, Malout (Punjab)</span>
+                            </p>
+
+                            <div class="h-px bg-stone-200 my-6"></div>
+
+                            <div class="space-y-4 text-sm text-stone-700 font-marcellus">
+                                <div class="flex items-start gap-3">
+                                    <div class="p-2.5 rounded-xl bg-amber-50 text-royalgold-700 mt-0.5 border border-royalgold-200">
+                                        <i class="fa-solid fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-cinzel font-bold text-stone-900 text-xs uppercase tracking-wider">Ceremony Date</p>
+                                        <p class="text-xs text-stone-600 mt-0.5 font-medium">Monday, 16 November 2026 • Barat: 10:15 AM</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-8 flex flex-col sm:flex-row gap-3">
+                                <a href="https://maps.google.com/?q=HRT+Resorts+Bathinda+Road+Malout" target="_blank" rel="noopener noreferrer" class="flex-1 py-3.5 px-4 rounded-xl bg-gradient-to-r from-royalgold-500 to-rose-500 text-white font-cinzel font-bold text-xs uppercase tracking-wider text-center flex items-center justify-center gap-2 shadow">
+                                    <i class="fa-solid fa-diamond-turn-right"></i>
+                                    <span>Get Directions</span>
+                                </a>
+                                <button onclick="copyVenueAddress()" class="py-3.5 px-4 rounded-xl border border-royalgold-300 hover:bg-stone-50 bg-white text-stone-800 text-xs font-cinzel font-bold tracking-wider flex items-center justify-center gap-2 shadow-sm">
+                                    <i id="copy-icon" class="fa-regular fa-copy text-royalgold-600"></i>
+                                    <span id="copy-text">Copy Address</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Directions Card -->
+                    <div class="lg:col-span-7">
+                        <div class="p-3 rounded-3xl glass-card-dark border border-royalgold-200">
+                            <div class="relative w-full h-[320px] rounded-2xl overflow-hidden bg-gradient-to-br from-stone-50 via-rose-50 to-amber-50 flex flex-col items-center justify-center text-center p-6 border border-stone-200">
+                                
+                                <div class="w-16 h-16 rounded-full bg-white border border-royalgold-300 mx-auto flex items-center justify-center text-royalgold-600 text-2xl shadow-sm mb-4">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                </div>
+
+                                <h4 class="text-2xl font-cinzel font-bold text-stone-900">H.R.T. Resorts</h4>
+                                <p class="text-sm text-royalgold-700 mt-1 font-marcellus font-semibold">Bathinda Road, Malout, Punjab</p>
+                                <p class="text-xs text-stone-600 mt-2 max-w-sm font-marcellus">Situated directly along the Bathinda-Malout Highway.</p>
+
+                                <div class="mt-5">
+                                    <a href="https://maps.google.com/?q=HRT+Resorts+Bathinda+Road+Malout" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white hover:bg-stone-50 text-stone-800 text-xs font-cinzel font-bold tracking-wider uppercase border border-royalgold-300 shadow-sm">
+                                        <span>Open in Google Maps</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-royalgold-600"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPECIAL CLOSING INVITATION NOTE -->
+        <section class="py-14 px-4">
+            <div class="max-w-xl mx-auto text-center glass-card-dark p-7 md:p-8 rounded-3xl border-2 border-royalgold-300 shadow-md relative overflow-hidden">
+                <div class="corner-ornament top-3 left-3 border-t-2 border-l-2"></div>
+                <div class="corner-ornament top-3 right-3 border-t-2 border-r-2"></div>
+                <div class="corner-ornament bottom-3 left-3 border-b-2 border-l-2"></div>
+                <div class="corner-ornament bottom-3 right-3 border-b-2 border-r-2"></div>
+
+                <div class="w-11 h-11 rounded-full bg-rose-50 border border-rose-300 mx-auto flex items-center justify-center text-rose-600 text-base mb-3">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                </div>
+                
+                <h3 class="text-2xl font-cinzel font-bold text-stone-900 mb-2">We Look Forward to Seeing You</h3>
+                
+                <p class="font-marcellus text-stone-800 text-sm sm:text-base leading-relaxed mb-6 font-medium">
+                    Please make sure to join us with your family on our special day.<br>
+                    Our celebration will not be complete without you!
+                </p>
+
+                <div class="inline-flex items-center gap-3">
+                    <button onclick="triggerRoseShower()" class="px-6 py-2.5 rounded-full bg-gradient-to-r from-royalgold-500 to-rose-400 text-white font-cinzel font-bold text-xs uppercase tracking-widest shadow hover:scale-105 active:scale-95 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-heart"></i>
+                        <span>Send Your Blessings</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="py-10 px-4 text-center border-t border-royalgold-200 bg-white/80">
+            <div class="max-w-2xl mx-auto space-y-3">
+                <span class="text-3xl font-gurmukhi text-royalgold-600">ੴ</span>
+                <p class="text-3xl font-script text-rose-900 font-bold">Jassa Singh & Parveen Kaur</p>
+                <p class="text-xs text-stone-600 font-marcellus">
+                    Patil Residence: Gobind Nagar, St. No. 2, Malout • 16 November 2026 • H.R.T. Resorts
+                </p>
+                <p class="text-[11px] text-stone-500 font-cinzel uppercase tracking-widest pt-2">With high compliments &amp; regards from the Patil &amp; Rattan Families</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed top-6 right-6 z-50 transform translate-y-[-150%] transition-transform duration-300 bg-white border border-royalgold-300 px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 pointer-events-none">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-rose-500"></i>
+        <span id="toast-msg" class="text-xs font-bold text-stone-800 font-cinzel tracking-wider"></span>
+    </div>
+
+    <!-- HIGH-EFFICIENCY SCRIPT (Zero Freeze / Zero Lag) -->
+    <script>
+        let isOpening = false;
+        let audioContext = null;
+        let isPlayingAudio = false;
+        let audioInterval = null;
+
+        // Instant Native Web Audio Chimes (Ultra-light, Zero Lag)
+        function playChime(freq = 523.25, time = 0) {
+            if (!audioContext) return;
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, audioContext.currentTime + time);
+            
+            gain.gain.setValueAtTime(0, audioContext.currentTime + time);
+            gain.gain.linearRampToValueAtTime(0.08, audioContext.currentTime + time + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + time + 2.0);
+            
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            
+            osc.start(audioContext.currentTime + time);
+            osc.stop(audioContext.currentTime + time + 2.2);
+        }
+
+        function playWeddingChimeLoop() {
+            if (!audioContext) {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                audioContext = new AudioCtx();
+            }
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+
+            // Play Indian classical pentatonic tones (Sa, Re, Ga, Pa, Dha)
+            const ragaNotes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25];
+            let step = 0;
+
+            audioInterval = setInterval(() => {
+                const note = ragaNotes[step % ragaNotes.length];
+                playChime(note, 0);
+                step++;
+            }, 1400);
+
+            isPlayingAudio = true;
+            document.getElementById('audio-icon').className = 'fa-solid fa-volume-high text-lg text-rose-500';
+            document.getElementById('audio-toggle-btn').classList.add('ring-2', 'ring-rose-400');
+        }
+
+        function toggleAudio() {
+            if (!isPlayingAudio) {
+                playWeddingChimeLoop();
+                showToast("Soft wedding chimes playing", "fa-music");
+            } else {
+                clearInterval(audioInterval);
+                isPlayingAudio = false;
+                document.getElementById('audio-icon').className = 'fa-solid fa-volume-xmark text-lg text-stone-500';
+                document.getElementById('audio-toggle-btn').classList.remove('ring-2', 'ring-rose-400');
+                showToast("Music muted", "fa-volume-xmark");
+            }
+        }
+
+        // Fast & Fluid Card Opening Sequence
+        function triggerCardOpenSequence() {
+            if (isOpening) return;
+            isOpening = true;
+
+            const envelopeBox = document.getElementById('envelope-box');
+            const overlay = document.getElementById('royal-envelope-overlay');
+            const hint = document.getElementById('envelope-hint');
+            const mainContent = document.getElementById('main-content');
+
+            if (hint) hint.style.opacity = '0';
+
+            // Start gentle chime audio
+            try { playWeddingChimeLoop(); } catch(e) {}
+
+            // Open flap
+            envelopeBox.classList.add('open');
+
+            // Quick confetti burst
+            confetti({
+                particleCount: 50,
+                spread: 60,
+                origin: { y: 0.5 },
+                colors: ['#D4AF37', '#F06A83', '#FFE4E8']
+            });
+
+            // Smooth expansion into page
+            setTimeout(() => {
+                envelopeBox.classList.add('morph-to-page');
+                overlay.style.backgroundColor = 'transparent';
+                mainContent.classList.remove('opacity-0');
+                mainContent.classList.add('opacity-100');
+            }, 300);
+
+            // Clean up overlay
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                startLightweightPetals();
+                showToast("Welcome to the Celebration!", "fa-champagne-glasses");
+            }, 850);
+        }
+
+        // Lightweight Petal Animation (Only 5 active elements to protect low-end mobile CPUs)
+        function startLightweightPetals() {
+            const container = document.getElementById('petal-container');
+            const florals = ['🌸', '🌺', '🌹', '✨'];
+
+            setInterval(() => {
+                if (container.children.length > 6) return;
+                const petal = document.createElement('div');
+                petal.className = 'petal text-sm';
+                petal.textContent = florals[Math.floor(Math.random() * florals.length)];
+                petal.style.left = (Math.random() * 90) + 'vw';
+                petal.style.top = '-20px';
+                petal.style.animationDuration = (7 + Math.random() * 4) + 's';
+                container.appendChild(petal);
+
+                setTimeout(() => petal.remove(), 11000);
+            }, 2000);
+        }
+
+        function triggerRoseShower() {
+            confetti({
+                particleCount: 60,
+                spread: 60,
+                origin: { y: 0.7 },
+                colors: ['#D4AF37', '#F06A83', '#FFE4E8']
+            });
+            showToast("Blessings showered on the couple!", "fa-heart");
+        }
+
+        // Reliable ISO-8601 Date Parsing (Monday, 16 Nov 2026, 10:15 AM IST)
+        const weddingDate = new Date('2026-11-16T10:15:00+05:30').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+
+            if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+
+            if (distance <= 0) {
+                daysEl.innerText = "00";
+                hoursEl.innerText = "00";
+                minutesEl.innerText = "00";
+                secondsEl.innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            daysEl.innerText = String(days).padStart(2, '0');
+            hoursEl.innerText = String(hours).padStart(2, '0');
+            minutesEl.innerText = String(minutes).padStart(2, '0');
+            secondsEl.innerText = String(seconds).padStart(2, '0');
+        }
+
+        // Initialize immediately and run every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Utilities
+        function addToCalendar() {
+            const title = encodeURIComponent("Wedding: Jassa Singh & Parveen Kaur");
+            const details = encodeURIComponent("Wedding Ceremony of Jassa Singh & Parveen Kaur.\nVenue: H.R.T. Resorts, Bathinda Road, Malout.");
+            const location = encodeURIComponent("H.R.T. Resorts, Bathinda Road, Malout, Punjab");
+            window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261116T044500Z/20261116T113000Z&details=${details}&location=${location}`, '_blank');
+        }
+
+        function copyVenueAddress() {
+            navigator.clipboard.writeText("H.R.T. Resorts, Bathinda Road, Malout, Punjab, India").then(() => {
+                document.getElementById('copy-text').textContent = "Copied!";
+                setTimeout(() => document.getElementById('copy-text').textContent = "Copy Address", 2000);
+                showToast("Address copied!", "fa-copy");
+            });
+        }
+
+        function showToast(msg, icon = "fa-circle-check") {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            document.getElementById('toast-icon').className = `fa-solid ${icon} text-rose-500`;
+            toast.classList.remove('translate-y-[-150%]');
+            toast.classList.add('translate-y-0');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0');
+                toast.classList.add('translate-y-[-150%]');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
+```
